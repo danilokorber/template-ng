@@ -2,14 +2,26 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "baseUrl": "./src", // setting a value for baseUrl is required
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [],
+    "paths": {
+      "@pages/*": ["./app/pages/*"],
+      "@modules/*": ["./app/modules/*"],
+      "@services/*": ["./app/services/*"],
+      "@interfaces/*": ["./app/interfaces/*"],
+      "@controls/*": ["./app/controls/*"],
+      "@components/*": ["./app/components/*"],
+      "@directives/*": ["./app/directives/*"],
+      "@pipes/*": ["./app/pipes/*"],
+      "@enums/*": ["./app/enums/*"],
+      "@assets/*": ["./app/assets/*"],
+      "@img/*": ["./app/assets/img/*"],
+      "@css/*": ["./app/assets/css/*"],
+      "@mocks/*": ["./app/assets/mocks/*"],
+      "@icons/*": ["./app/assets/icons/*"]
+    }
   },
-  "files": [
-    "src/main.ts",
-    "src/polyfills.ts"
-  ],
-  "include": [
-    "src/**/*.d.ts"
-  ]
+  "files": ["src/main.ts", "src/polyfills.ts"],
+  "include": ["src/**/*.d.ts"]
 }
