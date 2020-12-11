@@ -10,7 +10,7 @@
 
 ## Remover git
 
-Apagar pasta `.git`
+Apagar pasta `.git` (no mac: cmd + shift + [.])
 
 Renomear pasta principal
 
