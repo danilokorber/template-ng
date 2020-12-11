@@ -46,8 +46,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "assets": ["src/assets"],
+            "styles": ["src/assets/css/ng-zorro-antd-theme.less", "src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -106,8 +106,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "assets": ["src/assets"],
+            "styles": ["src/assets/css/ng-zorro-antd-theme.less", "src/styles.scss"],
             "scripts": []
           }
         },

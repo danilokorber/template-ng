@@ -16,12 +16,12 @@ module.exports = {
     fontFamily: {
       sans: ['Titillium Web'],
     },
-    future: {
-      removeDeprecatedGapUtilities: true,
-      purgeLayersByDefault: true,
-      defaultLineHeights: true,
-      standardFontWeights: true,
-    },
+    // future: {
+    //   removeDeprecatedGapUtilities: true,
+    //   purgeLayersByDefault: true,
+    //   defaultLineHeights: true,
+    //   standardFontWeights: true,
+    // },
   },
 
   variants: {},
