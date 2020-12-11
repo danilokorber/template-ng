@@ -14,6 +14,7 @@
       "@components/*": ["./app/components/*"],
       "@directives/*": ["./app/directives/*"],
       "@pipes/*": ["./app/pipes/*"],
+      "@classes/*": ["./app/classes/*"],
       "@enums/*": ["./app/enums/*"],
       "@assets/*": ["./app/assets/*"],
       "@img/*": ["./app/assets/img/*"],
