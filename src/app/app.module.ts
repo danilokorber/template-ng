@@ -11,6 +11,7 @@ import { ControlsModule } from '@controls/controls.module';
 import { PagesModule } from '@pages/pages.module';
 import { ServicesModule } from '@services/services.module';
 import { ComponentsModule } from '@components/components.module';
+import { DirectivesModule } from '@directives/directives.module';
 
 import { RootComponent } from './root.component';
 
@@ -25,6 +26,7 @@ import { RootComponent } from './root.component';
     ServicesModule,
     ComponentsModule,
     ControlsModule,
+    DirectivesModule,
     FontAwesomeModule,
     ZorroModule,
   ],
