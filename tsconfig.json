@@ -12,9 +12,24 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "lib": ["es2018", "dom"],
+    "paths": {
+      "@pages/*": ["./src/app/pages/*"],
+      "@modules/*": ["./src/app/modules/*"],
+      "@services/*": ["./src/app/services/*"],
+      "@interfaces/*": ["./src/app/interfaces/*"],
+      "@controls/*": ["./src/app/controls/*"],
+      "@components/*": ["./src/app/components/*"],
+      "@directives/*": ["./src/app/directives/*"],
+      "@pipes/*": ["./src/app/pipes/*"],
+      "@classes/*": ["./src/app/classes/*"],
+      "@enums/*": ["./src/app/enums/*"],
+      "@assets/*": ["./src/app/assets/*"],
+      "@img/*": ["./src/app/assets/img/*"],
+      "@css/*": ["./src/app/assets/css/*"],
+      "@mocks/*": ["./src/app/assets/mocks/*"],
+      "@icons/*": ["./src/app/assets/icons/*"],
+      "@env/*": ["./src/environments/*"]
+    }
   }
 }

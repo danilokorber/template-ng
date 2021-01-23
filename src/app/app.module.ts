@@ -22,6 +22,7 @@ import { RootComponent } from './root.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    HttpClientModule,
     PagesModule,
     ServicesModule,
     ComponentsModule,

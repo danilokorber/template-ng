@@ -20,7 +20,8 @@
       "@img/*": ["./app/assets/img/*"],
       "@css/*": ["./app/assets/css/*"],
       "@mocks/*": ["./app/assets/mocks/*"],
-      "@icons/*": ["./app/assets/icons/*"]
+      "@icons/*": ["./app/assets/icons/*"],
+      "@env/*": ["./environments/*"]
     }
   },
   "files": ["src/main.ts", "src/polyfills.ts"],
