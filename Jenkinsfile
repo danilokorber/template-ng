@@ -46,8 +46,10 @@ pipeline {
 				script {
 					echo "Building ${applicationName}"
 
-					sh "npm run build --output-path=/nginx/${applicationName}"
-					sh "ls -l /nginx/${applicationName}"
+					sh "npm run build"
+					if(!fileExists("/nginx/${applicationName}")) {
+						echo "/nginx/${applicationName} does not exist"
+					}
 				}
 			}
 		}
