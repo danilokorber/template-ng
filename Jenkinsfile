@@ -2,11 +2,6 @@ def applicationName = "template-ng"
 
 def gitURL = "https://github.com/danilokorber/${applicationName}.git"
 
-
-  stage('Clean Workspace'){
-    cleanWs()
-  }
-
   stage("Main build") {
 
     stage('Checkout SCM') {
