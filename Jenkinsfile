@@ -3,7 +3,12 @@ def applicationName = "template-ng"
 def gitURL = "https://github.com/danilokorber/${applicationName}.git"
 
 pipeline {
-	agent any
+	agent {
+        docker {
+            image 'node:latest' 
+            args '-p 3000:3000' 
+        }
+    }
 
 	stages {
 
