@@ -1,4 +1,4 @@
-def applicationName = "template"
+def applicationName = "template-ng"
 
 def gitURL = "https://github.com/danilokorber/${applicationName}.git"
 
@@ -7,16 +7,23 @@ pipeline {
 
 	stages {
 
-		stage("List downloaded files") {
+		stage("Removing old dist directory") {
 			steps{
-				script {
-					sh "ls"
-					sh "ls -l /nginx"
+				script {					
 					if(fileExists("/nginx/${applicationName}")) {
   						echo "Removing old dist files"
 						sh "rm -f -R /nginx/${applicationName}"
 					}
-					sh "ls -l /nginx"
+				}
+			}
+		}
+
+		stage("Build") {
+			steps{
+				script {
+					echo "Building ${applicationName}"
+					sh "ng build  --deploy-url /nginx/${applicationName}"
+					sh "ls -l /nginx/${applicationName}"
 				}
 			}
 		}
