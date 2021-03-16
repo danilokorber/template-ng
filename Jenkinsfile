@@ -13,12 +13,19 @@ pipeline {
 
 	stages {
 
-		stage("Removing old dist directory") {
+		stage("Checking pre reqs") {
 			steps{
 				script {					
 					nodejs(nodeJSInstallationName: 'v15.11.0') {
                     	sh 'npm -v'
                 	}
+				}
+			}
+		}
+
+		stage("Removing old dist directory") {
+			steps{
+				script {
 					if(fileExists("/nginx/${applicationName}")) {
   						echo "Removing old dist files"
 						sh "rm -f -R /nginx/${applicationName}"
