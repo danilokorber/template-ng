@@ -2,7 +2,7 @@ def applicationName = "template-ng"
 
 def gitURL = "https://github.com/danilokorber/${applicationName}.git"
 
-node (label: 'build && linux') {
+
   stage('Clean Workspace'){
     cleanWs()
   }
@@ -41,4 +41,3 @@ node (label: 'build && linux') {
 			sh "cp -a ${applicationName}/. /nginx/${applicationName}/"
 		}      
   	}
-}
