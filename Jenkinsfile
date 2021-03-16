@@ -46,7 +46,7 @@ pipeline {
 				script {
 					echo "Building ${applicationName}"
 
-					sh "npm run build --output-path /nginx/${applicationName}"
+					sh "npm run build --output-path=/nginx/${applicationName}"
 					sh "ls -l /nginx/${applicationName}"
 				}
 			}
