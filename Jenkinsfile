@@ -11,6 +11,7 @@ pipeline {
 			steps{
 				script {					
 					if(fileExists("/nginx/${applicationName}")) {
+						sh "node -v"
   						echo "Removing old dist files"
 						sh "rm -f -R /nginx/${applicationName}"
 					}
