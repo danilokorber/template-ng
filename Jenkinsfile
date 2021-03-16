@@ -15,9 +15,9 @@ pipeline {
 		stage("Checking pre reqs") {
 			steps{
 				script {					
-					nodejs(nodeJSInstallationName: 'v15.11.0') {
-                    	sh 'npm -v'
-                	}
+					
+                    sh 'npm -v'
+                	
 				}
 			}
 		}
