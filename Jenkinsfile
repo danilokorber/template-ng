@@ -2,9 +2,19 @@ def applicationName = "template-ng"
 
 def gitURL = "https://github.com/danilokorber/${applicationName}.git"
 
-stage("Checkout SCM") {
-	sh "ls"
+pipeline {
+	agent any
+
+	stages {
+
+		stage("Checkout SCM") {
+			sh "ls"
+		}
+
+	}
 }
+
+
 
 //   stage("Main build") {
 
