@@ -8,7 +8,12 @@ pipeline {
 	stages {
 
 		stage("Checkout SCM") {
-			sh "ls"
+
+			steps{
+				script {
+					sh "ls"
+				}
+			}
 		}
 
 	}
