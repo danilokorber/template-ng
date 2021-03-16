@@ -10,7 +10,9 @@ pipeline {
 		stage("Removing old dist directory") {
 			steps{
 				script {					
-					sh "node -v"
+					nodejs(nodeJSInstallationName: 'v15.11.0') {
+                    	sh 'npm -v'
+                	}
 					if(fileExists("/nginx/${applicationName}")) {
   						echo "Removing old dist files"
 						sh "rm -f -R /nginx/${applicationName}"
