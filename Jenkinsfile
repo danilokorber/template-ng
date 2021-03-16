@@ -11,7 +11,12 @@ pipeline {
 			steps{
 				script {
 					sh "ls"
-					sh "ls -l /nginx/${applicationName}"
+					sh "ls -l /nginx"
+					if(fileExists("/nginx/${applicationName}")) {
+  						echo "Removing old dist files"
+						sh "rm -f -R /nginx/${applicationName}"
+					}
+					sh "ls -l /nginx"
 				}
 			}
 		}
