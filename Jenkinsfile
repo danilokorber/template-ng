@@ -2,8 +2,8 @@ def applicationName = "template-ng"
 
 def gitURL = "https://github.com/danilokorber/${applicationName}.git"
 
-node {
-	//agent any
+pipeline {
+	agent any
 
 	stages {
 
