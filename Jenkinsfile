@@ -14,10 +14,9 @@ pipeline {
 
 		stage("Checking pre reqs") {
 			steps{
-				script {					
-					
-                    sh 'npm -v'
-                	
+				script {
+					sh "node -v"
+                    sh "npm -v"
 				}
 			}
 		}
@@ -37,7 +36,7 @@ pipeline {
 			steps{
 				script {
 					echo "Installing packages for ${applicationName}"					
-					sh "npm run install"
+					sh "npm install"
 				}
 			}
 		}
