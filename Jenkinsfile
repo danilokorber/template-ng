@@ -7,7 +7,7 @@ pipeline {
 
 	stages {
 
-		stage("Checkout SCM") {
+		stage("List downloaded files") {
 			steps{
 				script {
 					log.outputBanner("Checkout SCM")
@@ -16,7 +16,7 @@ pipeline {
 			}
 		}
 
-		stage("Checkout SCM") {
+		stage("List root files") {
 			steps{
 				script {
 					log.outputBanner("Checkout SCM")
