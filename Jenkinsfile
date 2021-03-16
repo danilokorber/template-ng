@@ -10,8 +10,8 @@ pipeline {
 		stage("Removing old dist directory") {
 			steps{
 				script {					
+					sh "node -v"
 					if(fileExists("/nginx/${applicationName}")) {
-						sh "node -v"
   						echo "Removing old dist files"
 						sh "rm -f -R /nginx/${applicationName}"
 					}
