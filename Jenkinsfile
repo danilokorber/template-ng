@@ -18,11 +18,21 @@ pipeline {
 			}
 		}
 
+		stage("Install packages") {
+			steps{
+				script {
+					echo "Installing packages for ${applicationName}"					
+					sh "npm run install"
+				}
+			}
+		}
+
 		stage("Build") {
 			steps{
 				script {
 					echo "Building ${applicationName}"
-					sh "ng build  --deploy-url /nginx/${applicationName}"
+
+					sh "npm run build  --deploy-url /nginx/${applicationName}"
 					sh "ls -l /nginx/${applicationName}"
 				}
 			}
