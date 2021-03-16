@@ -1,4 +1,4 @@
-def applicationName = "template-ng"
+def applicationName = "template"
 
 def gitURL = "https://github.com/danilokorber/${applicationName}.git"
 
