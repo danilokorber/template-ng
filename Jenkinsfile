@@ -8,10 +8,19 @@ pipeline {
 	stages {
 
 		stage("Checkout SCM") {
-
 			steps{
 				script {
+					log.outputBanner("Checkout SCM")
 					sh "ls"
+				}
+			}
+		}
+
+		stage("Checkout SCM") {
+			steps{
+				script {
+					log.outputBanner("Checkout SCM")
+					sh "ls -l /"
 				}
 			}
 		}
