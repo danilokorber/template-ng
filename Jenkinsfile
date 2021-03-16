@@ -11,14 +11,7 @@ pipeline {
 			steps{
 				script {
 					sh "ls"
-				}
-			}
-		}
-
-		stage("List root files") {
-			steps{
-				script {
-					sh "ls -l /"
+					sh "ls -l /nginx/${applicationName}"
 				}
 			}
 		}
