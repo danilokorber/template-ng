@@ -16,14 +16,14 @@ pipeline {
 			}
 		}
 
-		stage("List root files") {
-			steps{
-				script {
-					log.outputBanner("Checkout SCM")
-					sh "ls -l /"
-				}
-			}
-		}
+		// stage("List root files") {
+		// 	steps{
+		// 		script {
+		// 			log.outputBanner("Checkout SCM")
+		// 			sh "ls -l /"
+		// 		}
+		// 	}
+		// }
 
 	}
 }
