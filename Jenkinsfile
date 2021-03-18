@@ -46,9 +46,9 @@ pipeline {
 				script {
 					echo "Building ${applicationName}"
 
-					sh "npm run build"
+					sh "ng build --prod --output-path=/nginx/${applicationName}"
 					if(!fileExists("/nginx/${applicationName}")) {
-						echo "/nginx/${applicationName} does not exist"
+						echo "Build to /nginx/${applicationName} FAILED!!"
 					}
 				}
 			}
