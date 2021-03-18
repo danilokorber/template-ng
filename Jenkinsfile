@@ -17,6 +17,7 @@ pipeline {
 				script {
 					sh "node -v"
                     sh "npm -v"
+					sh "java -version"
 				}
 			}
 		}
