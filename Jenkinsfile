@@ -41,6 +41,16 @@ pipeline {
 			}
 		}
 
+		stage("Lint") {
+			steps{
+				script {
+					echo "Linting ${applicationName}"
+
+					sh "npm run sonar"
+				}
+			}
+		}
+
 		stage("Build") {
 			steps{
 				script {
