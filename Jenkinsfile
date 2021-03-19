@@ -18,6 +18,7 @@ pipeline {
 					sh "node -v"
                     sh "npm -v"
 					sh "java -version"
+					sh "docker container ls"
 				}
 			}
 		}
