@@ -17,7 +17,7 @@ pipeline {
 				script {
 					sh "node -v"
                     sh "npm -v"
-					sh "sudo apt install default-jdk"
+					sh "apt install default-jdk"
 					sh "java -version"
 				}
 			}
