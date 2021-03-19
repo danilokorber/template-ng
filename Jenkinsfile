@@ -70,17 +70,21 @@ pipeline {
 			}
 		}
 
-		// stage("Restart docker") {
-		// 	steps{
-		// 		script {
-		// 			echo "Restarting docker container"
+		stage("Restart docker") {
+			steps{
+				script {
+					echo "Restarting docker container"
+					sh "docker container restart ${applicationName}"
 
-		// 			sh "docker container stop ${applicationName}"
-		// 			sh "docker container start ${applicationName}"
-					
-		// 		}
-		// 	}
-		// }
+					def inspectExitCode = sh script: "docker container inspect ${applicationName}", returnStatus: true
+					if (inspectExitCode == 0) {
+    					sh "docker container restart ${applicationName}"
+					} else {
+    					sh "Container ${applicationName} not found."
+					}					
+				}
+			}
+		}
 
 	}
 }
