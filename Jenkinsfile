@@ -70,6 +70,15 @@ pipeline {
 			}
 		}
 
+		stage("Copy settings") {
+			steps{
+				script {
+					echo "Copy settings}"
+					sh "cp ./config/nginx.conf /etc/nginx/nginx.conf"
+				}
+			}
+		}
+
 		stage("Restart docker") {
 			steps{
 				script {
