@@ -52,7 +52,6 @@ pipeline {
 			steps{
 				script {
 					echo "Linting ${applicationName}"
-
 					sh "npm run sonar"
 				}
 			}
@@ -62,7 +61,6 @@ pipeline {
 			steps{
 				script {
 					echo "Building ${applicationName}"
-
 					sh "npm run build:prod"
 					sh "chmod 755 /nginx/${applicationName}/*"
 					if(!fileExists("/nginx/${applicationName}")) {
@@ -72,17 +70,17 @@ pipeline {
 			}
 		}
 
-		stage("Restart docker") {
-			steps{
-				script {
-					echo "Restarting docker container"
+		// stage("Restart docker") {
+		// 	steps{
+		// 		script {
+		// 			echo "Restarting docker container"
 
-					sh "docker container stop ${applicationName}"
-					sh "docker container start ${applicationName}"
+		// 			sh "docker container stop ${applicationName}"
+		// 			sh "docker container start ${applicationName}"
 					
-				}
-			}
-		}
+		// 		}
+		// 	}
+		// }
 
 	}
 }
