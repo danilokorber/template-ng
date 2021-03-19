@@ -17,7 +17,7 @@ pipeline {
 				script {
 					sh "node -v"
                     sh "npm -v"
-					sh "apt-get -y install openjdk-11-jre-headless"
+					sh "sudo apt install default-jdk"
 					sh "java -version"
 				}
 			}
