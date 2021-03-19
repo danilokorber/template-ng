@@ -6,7 +6,7 @@ pipeline {
 	agent {
         docker {
             image 'dkorber/java-node:latest' 
-            args '-p 3000:3000' 
+            args '-p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock' 
         }
     }
 
