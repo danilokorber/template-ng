@@ -72,6 +72,18 @@ pipeline {
 			}
 		}
 
+		stage("Restart docker") {
+			steps{
+				script {
+					echo "Restarting docker container"
+
+					sh "docker container stop ${applicationName}"
+					sh "docker container start ${applicationName}"
+					
+				}
+			}
+		}
+
 	}
 }
 
