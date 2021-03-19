@@ -22,12 +22,17 @@ pipeline {
 			}
 		}
 
-		stage("Removing old dist directory") {
+		stage("Prepare dist directory") {
 			steps{
 				script {
 					if(fileExists("/nginx/${applicationName}")) {
   						echo "Removing old dist files"
 						sh "rm -f -R /nginx/${applicationName}"
+					}
+					if(!fileExists("/nginx/${applicationName}")) {
+  						echo "Creating new dist directory"
+						sh "mkdir /nginx/${applicationName}"
+						sh "chmod 755 /nginx/${applicationName}"
 					}
 				}
 			}
@@ -58,6 +63,7 @@ pipeline {
 					echo "Building ${applicationName}"
 
 					sh "npm run build:prod"
+					sh "chmod 755 /nginx/${applicationName}/*"
 					if(!fileExists("/nginx/${applicationName}")) {
 						echo "Build to /nginx/${applicationName} FAILED!!"
 					}
