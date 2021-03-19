@@ -18,7 +18,7 @@ pipeline {
 					sh "node -v"
                     sh "npm -v"
 					sh "java -version"
-					sh "docker container ls"
+					sh "docker -v"
 				}
 			}
 		}
@@ -30,11 +30,11 @@ pipeline {
   						echo "Removing old dist files"
 						sh "rm -f -R /nginx/${applicationName}"
 					}
-					if(!fileExists("/nginx/${applicationName}")) {
-  						echo "Creating new dist directory"
-						sh "mkdir /nginx/${applicationName}"
-						sh "chmod 755 /nginx/${applicationName}"
-					}
+					// if(!fileExists("/nginx/${applicationName}")) {
+  					// 	echo "Creating new dist directory"
+					// 	sh "mkdir /nginx/${applicationName}"
+					// 	sh "chmod 755 /nginx/${applicationName}"
+					// }
 				}
 			}
 		}
@@ -64,7 +64,7 @@ pipeline {
 					echo "Building ${applicationName}"
 
 					sh "npm run build:prod"
-					sh "chmod 755 /nginx/${applicationName}/*"
+					//sh "chmod 755 /nginx/${applicationName}/*"
 					if(!fileExists("/nginx/${applicationName}")) {
 						echo "Build to /nginx/${applicationName} FAILED!!"
 					}
@@ -72,17 +72,17 @@ pipeline {
 			}
 		}
 
-		stage("Restart docker") {
-			steps{
-				script {
-					echo "Restarting docker container"
+		// stage("Restart docker") {
+		// 	steps{
+		// 		script {
+		// 			echo "Restarting docker container"
 
-					sh "docker container stop ${applicationName}"
-					sh "docker container start ${applicationName}"
+		// 			sh "docker container stop ${applicationName}"
+		// 			sh "docker container start ${applicationName}"
 					
-				}
-			}
-		}
+		// 		}
+		// 	}
+		// }
 
 	}
 }
