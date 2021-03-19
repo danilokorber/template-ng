@@ -5,7 +5,7 @@ def gitURL = "https://github.com/danilokorber/${applicationName}.git"
 pipeline {
 	agent {
         docker {
-            image 'node:latest' 
+            image 'dkorber/java-node:latest' 
             args '-p 3000:3000' 
         }
     }
