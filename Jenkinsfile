@@ -95,7 +95,7 @@ pipeline {
 				script {
 					echo "Starting ${applicationName}"
 
-					sh "docker run --network easyware --name ${applicationName} ${dockerImageGroup}/${applicationName}"
+					sh "docker run -d --network easyware --name ${applicationName} ${dockerImageGroup}/${applicationName}"
 				}
 			}
 		}

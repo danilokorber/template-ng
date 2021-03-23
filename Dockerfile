@@ -17,4 +17,4 @@ RUN chmod -R g=u /var/cache/nginx /var/log/nginx /etc/nginx && \
 # copy the web-application
 COPY ./dist /usr/share/nginx/html
 
-EXPOSE 8080
+#EXPOSE 8080
