@@ -113,7 +113,14 @@ pipeline {
 
 					sh "docker stop ${applicationName} || true && docker rm ${applicationName} || true"
 
-					sh "docker run -d --network easyware --name ${applicationName} ${dockerImageGroup}/${applicationName}"
+					sh """docker run -d \
+					                 --network easyware \
+					                 --name ${applicationName} \
+									 --label traefik.enable=true \
+									 --label traefik.http.routers.${applicationName}.entrypoints=websecure \
+									 --label traefik.http.routers.${applicationName}.rule=Host(`${dnsRecord}.${dnsDomain}`) \
+									 --label traefik.http.routers.${applicationName}.tls.certresolver=easywareresolver \
+									 ${dockerImageGroup}/${applicationName}"""
 				}
 			}
 		}
