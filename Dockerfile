@@ -1,6 +1,6 @@
 # build & run with docker
 
-FROM nginx:1.19.1
+FROM nginx:latest
 
 # override default configuration
 COPY ./config/nginx.conf /etc/nginx/nginx.conf

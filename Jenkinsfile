@@ -81,7 +81,7 @@ pipeline {
 				script {
 					echo "Building ${applicationName} docker"
 
-					sh "docker build -t ${dockerImageGroup}/${applicationName} ./config"
+					sh "docker build -t ${dockerImageGroup}/${applicationName} ."
 					// sh "docker tag ${dockerImageGroup}/${applicationName} ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:${applicationVersion}"
 					// sh "docker tag ${dockerImageGroup}/${applicationName} ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:latest"
 					// sh "docker push ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:${applicationVersion}"
