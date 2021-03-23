@@ -95,6 +95,8 @@ pipeline {
 				script {
 					echo "Starting ${applicationName}"
 
+					sh "docker stop ${applicationName} || true && docker rm ${applicationName} || true"
+
 					sh "docker run -d --network easyware --name ${applicationName} ${dockerImageGroup}/${applicationName}"
 				}
 			}
