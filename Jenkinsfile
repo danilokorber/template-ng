@@ -4,7 +4,7 @@ def applicationName = "template-ng"
 def gitURL = "https://github.com/danilokorber/${applicationName}.git"
 
 def dnsResourceGroup = "Easyware"
-def dnsDomain = "korber.com.br"
+def dnsDomain = "easyware.io"
 def dnsRecord = "template"
 def dnsCNAMEvalue = "obelix.easyware.io"
 
