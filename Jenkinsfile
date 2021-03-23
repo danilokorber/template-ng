@@ -3,6 +3,11 @@ def applicationName = "template-ng"
 
 def gitURL = "https://github.com/danilokorber/${applicationName}.git"
 
+def dnsResourceGroup = "Easyware"
+def dnsDomain = "korber.com.br"
+def dnsRecord = "template"
+def dnsCNAMEvalue = "obelix.easyware.io"
+
 def myNexusHostname = "lpitgovnexus01.bmwgroup.net"
 def myNexusHostedRepoPort = "16015"
 def myNexusGroupRepoPort = "16016"
@@ -86,6 +91,16 @@ pipeline {
 					// sh "docker tag ${dockerImageGroup}/${applicationName} ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:latest"
 					// sh "docker push ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:${applicationVersion}"
 					// sh "docker push ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:latest"
+				}
+			}
+		}
+
+		stage("Create DNS record") {
+			steps{
+				script{
+					echo "Creating DNS record ${dnsRecord}.${dnsDomain}"
+
+					sh "docker run -ti dkorber/azure az network dns record-set cname set-record -g ${dnsResourceGroup} -z ${dnsDomain} -n ${dnsRecord} -c ${dnsCNAMEvalue}"
 				}
 			}
 		}
