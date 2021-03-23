@@ -100,7 +100,8 @@ pipeline {
 				script{
 					echo "Creating DNS record ${dnsRecord}.${dnsDomain}"
 
-					sh "docker run -ti dkorber/azure az network dns record-set cname set-record -g ${dnsResourceGroup} -z ${dnsDomain} -n ${dnsRecord} -c ${dnsCNAMEvalue}"
+					def azureCmd = "az network dns record-set cname set-record -g ${dnsResourceGroup} -z ${dnsDomain} -n ${dnsRecord} -c ${dnsCNAMEvalue}"
+					sh "docker run dkorber/azure ${azureCmd}"
 				}
 			}
 		}
