@@ -1,6 +1,12 @@
+def dockerImageGroup = "easyware"
 def applicationName = "template-ng"
 
 def gitURL = "https://github.com/danilokorber/${applicationName}.git"
+
+def myNexusHostname = "lpitgovnexus01.bmwgroup.net"
+def myNexusHostedRepoPort = "16015"
+def myNexusGroupRepoPort = "16016"
+
 
 pipeline {
 	agent {
@@ -57,10 +63,10 @@ pipeline {
 			}
 		}
 
-		stage("Build") {
+		stage("Build app") {
 			steps{
 				script {
-					echo "Building ${applicationName}"
+					echo "Building ${applicationName} app"
 					sh "npm run build:prod"
 					sh "chmod 755 /nginx/${applicationName}/*"
 					if(!fileExists("/nginx/${applicationName}")) {
@@ -70,30 +76,46 @@ pipeline {
 			}
 		}
 
-		stage("Copy settings") {
+		stage("Build docker") {
 			steps{
 				script {
-					echo "Copy settings}"
-					sh "cp ./config/nginx.conf /etc/nginx/nginx.conf"
+					echo "Building ${applicationName} docker"
+
+					sh "docker build -t ${dockerImageGroup}/${applicationName} ./config/Dockerfile"
+					// sh "docker tag ${dockerImageGroup}/${applicationName} ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:${applicationVersion}"
+					// sh "docker tag ${dockerImageGroup}/${applicationName} ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:latest"
+					// sh "docker push ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:${applicationVersion}"
+					// sh "docker push ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:latest"
 				}
 			}
 		}
 
-		stage("Restart docker") {
+		stage("Start docker") {
 			steps{
 				script {
-					echo "Restarting docker container"
-					sh "docker container restart ${applicationName}"
+					echo "Starting ${applicationName}"
 
-					def inspectExitCode = sh script: "docker container inspect ${applicationName}", returnStatus: true
-					if (inspectExitCode == 0) {
-    					sh "docker container restart ${applicationName}"
-					} else {
-    					sh "Container ${applicationName} not found."
-					}					
+					sh "docker run --network easyware --name ${applicationName} ${dockerImageGroup}/${applicationName}"
 				}
 			}
 		}
+		
+
+		// stage("Restart docker") {
+		// 	steps{
+		// 		script {
+		// 			echo "Restarting docker container"
+		// 			sh "docker container restart ${applicationName}"
+
+		// 			def inspectExitCode = sh script: "docker container inspect ${applicationName}", returnStatus: true
+		// 			if (inspectExitCode == 0) {
+    	// 				sh "docker container restart ${applicationName}"
+		// 			} else {
+    	// 				sh "Container ${applicationName} not found."
+		// 			}					
+		// 		}
+		// 	}
+		// }
 
 	}
 }
