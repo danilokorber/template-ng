@@ -21,34 +21,7 @@ pipeline {
         }
     }
 
-	stages {
-
-		// stage("Checking pre reqs") {
-		// 	steps{
-		// 		script {
-		// 			sh "node -v"
-        //             sh "npm -v"
-		// 			sh "java -version"
-		// 			sh "docker -v"
-		// 		}
-		// 	}
-		// }
-
-		// stage("Prepare dist directory") {
-		// 	steps{
-		// 		script {
-		// 			if(fileExists("/nginx/${applicationName}")) {
-  		// 				echo "Removing old dist files"
-		// 				sh "rm -f -R /nginx/${applicationName}"
-		// 			}
-		// 			if(!fileExists("/nginx/${applicationName}")) {
-  		// 				echo "Creating new dist directory"
-		// 				sh "mkdir /nginx/${applicationName}"
-		// 				sh "chmod 755 /nginx/${applicationName}"
-		// 			}
-		// 		}
-		// 	}
-		// }
+	stages {		
 
 		stage("Install packages") {
 			steps{
@@ -73,10 +46,6 @@ pipeline {
 				script {
 					echo "Building ${applicationName} app"
 					sh "npm run build:prod"
-					// sh "chmod 755 /nginx/${applicationName}/*"
-					// if(!fileExists("/nginx/${applicationName}")) {
-					// 	echo "Build to /nginx/${applicationName} FAILED!!"
-					// }
 				}
 			}
 		}
@@ -85,7 +54,6 @@ pipeline {
 			steps{
 				script {
 					echo "Building ${applicationName} docker"
-
 					sh "docker build -t ${dockerImageGroup}/${applicationName} ."
 					// sh "docker tag ${dockerImageGroup}/${applicationName} ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:${applicationVersion}"
 					// sh "docker tag ${dockerImageGroup}/${applicationName} ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:latest"
@@ -99,7 +67,6 @@ pipeline {
 			steps{
 				script{
 					echo "Creating DNS record ${dnsRecord}.${dnsDomain}"
-
 					def azureCmd = "az network dns record-set cname set-record -g ${dnsResourceGroup} -z ${dnsDomain} -n ${dnsRecord} -c ${dnsCNAMEvalue}"
 					sh "docker run dkorber/azure ${azureCmd}"
 				}
@@ -110,11 +77,8 @@ pipeline {
 			steps{
 				script {
 					echo "Starting ${applicationName}"
-
 					sh "docker stop ${applicationName} || true && docker rm ${applicationName} || true"
-
 					def host = "Host(`${dnsRecord}.${dnsDomain}`)"
-
 					sh """docker run -d \
 					                 --network easyware \
 					                 --name ${applicationName} \
@@ -126,60 +90,6 @@ pipeline {
 				}
 			}
 		}
-		
-
-		// stage("Restart docker") {
-		// 	steps{
-		// 		script {
-		// 			echo "Restarting docker container"
-		// 			sh "docker container restart ${applicationName}"
-
-		// 			def inspectExitCode = sh script: "docker container inspect ${applicationName}", returnStatus: true
-		// 			if (inspectExitCode == 0) {
-    	// 				sh "docker container restart ${applicationName}"
-		// 			} else {
-    	// 				sh "Container ${applicationName} not found."
-		// 			}					
-		// 		}
-		// 	}
-		// }
 
 	}
 }
-
-
-
-//   stage("Main build") {
-
-//     stage('Checkout SCM') {
-//       checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: "https://github.com/danilokorber/${applicationName}.git" ]]])
-//     }    
-    
-// 	stage('Install') {
-// 		sh label:
-// 			'Running npm install',
-// 		script: {
-// 			sh "node --version"
-// 			sh "cd ${applicationName}"
-// 			sh "npm install"
-// 		}
-// 	}
-
-//     stage ('Build') {      
-// 		sh label:
-// 			'Running npm run build',
-// 		script: {
-// 			sh "node --version"
-// 			sh "cd ${applicationName}"
-// 			sh "npm run build"
-// 		}      
-//     }
-//   }
-
-//   	stage("Deploy") {
-// 		sh label:
-// 			'Deploying',
-// 		script: {
-// 			sh "cp -a ${applicationName}/. /nginx/${applicationName}/"
-// 		}      
-//   	}
