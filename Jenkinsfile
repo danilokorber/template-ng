@@ -12,38 +12,38 @@ pipeline {
 	agent {
         docker {
             image 'dkorber/java-node:latest' 
-            args '-p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock' 
+            args '-p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock --name jenkins-deploy' 
         }
     }
 
 	stages {
 
-		stage("Checking pre reqs") {
-			steps{
-				script {
-					sh "node -v"
-                    sh "npm -v"
-					sh "java -version"
-					sh "docker -v"
-				}
-			}
-		}
+		// stage("Checking pre reqs") {
+		// 	steps{
+		// 		script {
+		// 			sh "node -v"
+        //             sh "npm -v"
+		// 			sh "java -version"
+		// 			sh "docker -v"
+		// 		}
+		// 	}
+		// }
 
-		stage("Prepare dist directory") {
-			steps{
-				script {
-					if(fileExists("/nginx/${applicationName}")) {
-  						echo "Removing old dist files"
-						sh "rm -f -R /nginx/${applicationName}"
-					}
-					if(!fileExists("/nginx/${applicationName}")) {
-  						echo "Creating new dist directory"
-						sh "mkdir /nginx/${applicationName}"
-						sh "chmod 755 /nginx/${applicationName}"
-					}
-				}
-			}
-		}
+		// stage("Prepare dist directory") {
+		// 	steps{
+		// 		script {
+		// 			if(fileExists("/nginx/${applicationName}")) {
+  		// 				echo "Removing old dist files"
+		// 				sh "rm -f -R /nginx/${applicationName}"
+		// 			}
+		// 			if(!fileExists("/nginx/${applicationName}")) {
+  		// 				echo "Creating new dist directory"
+		// 				sh "mkdir /nginx/${applicationName}"
+		// 				sh "chmod 755 /nginx/${applicationName}"
+		// 			}
+		// 		}
+		// 	}
+		// }
 
 		stage("Install packages") {
 			steps{
@@ -54,24 +54,24 @@ pipeline {
 			}
 		}
 
-		stage("Lint") {
-			steps{
-				script {
-					echo "Linting ${applicationName}"
-					sh "npm run sonar"
-				}
-			}
-		}
+		// stage("Lint") {
+		// 	steps{
+		// 		script {
+		// 			echo "Linting ${applicationName}"
+		// 			sh "npm run sonar"
+		// 		}
+		// 	}
+		// }
 
 		stage("Build app") {
 			steps{
 				script {
 					echo "Building ${applicationName} app"
 					sh "npm run build:prod"
-					sh "chmod 755 /nginx/${applicationName}/*"
-					if(!fileExists("/nginx/${applicationName}")) {
-						echo "Build to /nginx/${applicationName} FAILED!!"
-					}
+					// sh "chmod 755 /nginx/${applicationName}/*"
+					// if(!fileExists("/nginx/${applicationName}")) {
+					// 	echo "Build to /nginx/${applicationName} FAILED!!"
+					// }
 				}
 			}
 		}
@@ -81,7 +81,7 @@ pipeline {
 				script {
 					echo "Building ${applicationName} docker"
 
-					sh "docker build -t ${dockerImageGroup}/${applicationName} ./config/Dockerfile"
+					sh "docker build -t ${dockerImageGroup}/${applicationName} ./config"
 					// sh "docker tag ${dockerImageGroup}/${applicationName} ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:${applicationVersion}"
 					// sh "docker tag ${dockerImageGroup}/${applicationName} ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:latest"
 					// sh "docker push ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:${applicationVersion}"
