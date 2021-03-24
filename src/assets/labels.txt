@@ -1,0 +1,4 @@
+traefik.enable=true
+traefik.http.routers.template.entrypoints=websecure
+traefik.http.routers.template.rule=Host(`template.easyware.io`)
+traefik.http.routers.template.tls.certresolver=easywareresolver
