@@ -8,6 +8,8 @@ def dnsDomain = "easyware.io"
 def dnsRecord = "template"
 def dnsCNAMEvalue = "obelix.easyware.io"
 
+def labelFile = "./dist/assets/labels.txt"
+
 def myNexusHostname = "lpitgovnexus01.bmwgroup.net"
 def myNexusHostedRepoPort = "16015"
 def myNexusGroupRepoPort = "16016"
@@ -77,19 +79,13 @@ pipeline {
 			steps{
 				script {
 					echo "Starting ${applicationName}"
-					sh "docker stop ${applicationName} || true && docker rm ${applicationName} || true"
-					
-					def labelFile = "./dist/assets/labels.txt"
-					//sh "echo traefik.enable=true > ${labelFile}"
-					//sh "echo traefik.http.routers.${applicationName}.entrypoints=websecure >> ${labelFile}"
-					//sh "echo traefik.http.routers.${applicationName}.rule=Host(`${dnsRecord}.${dnsDomain}`) >> ${labelFile}"
-					//sh "echo traefik.http.routers.${applicationName}.tls.certresolver=easywareresolver >> ${labelFile}"
-
+					sh "docker stop ${applicationName} || true && docker rm ${applicationName} || true"	
 					sh """docker run -d \
 					                 --network easyware \
 					                 --name ${applicationName} \
 									 --label-file ${labelFile} \
 									 ${dockerImageGroup}/${applicationName}"""
+					sh "rm ${labelFile}"					
 				}
 			}
 		}
