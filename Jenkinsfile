@@ -79,16 +79,16 @@ pipeline {
 					echo "Starting ${applicationName}"
 					sh "docker stop ${applicationName} || true && docker rm ${applicationName} || true"
 					
-					sh "labelFile=./labels.txt"
-					sh "echo traefik.enable=true > $labelFile"
-					sh "echo traefik.http.routers.${applicationName}.entrypoints=websecure >> $labelFile"
-					sh "echo traefik.http.routers.${applicationName}.rule=Host(`${dnsRecord}.${dnsDomain}`) >> $labelFile"
-					sh "echo traefik.http.routers.${applicationName}.tls.certresolver=easywareresolver >> $labelFile"
+					def labelFile = "./labels.txt"
+					sh "echo traefik.enable=true > ${labelFile}"
+					sh "echo traefik.http.routers.${applicationName}.entrypoints=websecure >> ${labelFile}"
+					sh "echo traefik.http.routers.${applicationName}.rule=Host(`${dnsRecord}.${dnsDomain}`) >> ${labelFile}"
+					sh "echo traefik.http.routers.${applicationName}.tls.certresolver=easywareresolver >> ${labelFile}"
 
 					sh """docker run -d \
 					                 --network easyware \
 					                 --name ${applicationName} \
-									 --label-file ./labels.txt
+									 --label-file ${labelFile}
 									 ${dockerImageGroup}/${applicationName}"""
 				}
 			}
