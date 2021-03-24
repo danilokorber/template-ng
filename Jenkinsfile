@@ -81,9 +81,9 @@ pipeline {
 					
 					sh "labelFile=""./labels.txt"""
 					sh "echo traefik.enable=true > $labelFile"
-					sh "traefik.http.routers.${applicationName}.entrypoints=websecure >> $labelFile"
-					sh "traefik.http.routers.${applicationName}.rule=Host\(\`${dnsRecord}.${dnsDomain}\`\) >> $labelFile"
-					sh "traefik.http.routers.${applicationName}.tls.certresolver=easywareresolver >> $labelFile"
+					sh "echo traefik.http.routers.${applicationName}.entrypoints=websecure >> $labelFile"
+					sh "echo traefik.http.routers.${applicationName}.rule=Host(`${dnsRecord}.${dnsDomain}`) >> $labelFile"
+					sh "echo traefik.http.routers.${applicationName}.tls.certresolver=easywareresolver >> $labelFile"
 
 					sh """docker run -d \
 					                 --network easyware \
