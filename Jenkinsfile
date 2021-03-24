@@ -84,7 +84,7 @@ pipeline {
 					                 --name ${applicationName} \
 									 --label traefik.enable=true \
 									 --label traefik.http.routers.${applicationName}.entrypoints=websecure \
-									 --label traefik.http.routers.${applicationName}.rule=${host} \
+									 --label traefik.http.routers.${applicationName}.rule=Host\(\`${dnsRecord}.${dnsDomain}\`\) \
 									 --label traefik.http.routers.${applicationName}.tls.certresolver=easywareresolver \
 									 ${dockerImageGroup}/${applicationName}"""
 				}
