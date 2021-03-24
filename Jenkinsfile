@@ -78,7 +78,7 @@ pipeline {
 				script {
 					echo "Starting ${applicationName}"
 					sh "docker stop ${applicationName} || true && docker rm ${applicationName} || true"
-					def host = "Host(`${dnsRecord}.${dnsDomain}`)"
+					def host = "Host\(\`${dnsRecord}.${dnsDomain}\`\)"
 					sh """docker run -d \
 					                 --network easyware \
 					                 --name ${applicationName} \
