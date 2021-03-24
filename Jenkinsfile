@@ -88,7 +88,7 @@ pipeline {
 					sh """docker run -d \
 					                 --network easyware \
 					                 --name ${applicationName} \
-									 --label-file ${labelFile}
+									 --label-file ${labelFile} \
 									 ${dockerImageGroup}/${applicationName}"""
 				}
 			}
