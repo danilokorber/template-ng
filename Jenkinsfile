@@ -79,7 +79,7 @@ pipeline {
 					echo "Starting ${applicationName}"
 					sh "docker stop ${applicationName} || true && docker rm ${applicationName} || true"
 					
-					def labelFile = "./assets/labels.txt"
+					def labelFile = "./dist/assets/labels.txt"
 					//sh "echo traefik.enable=true > ${labelFile}"
 					//sh "echo traefik.http.routers.${applicationName}.entrypoints=websecure >> ${labelFile}"
 					//sh "echo traefik.http.routers.${applicationName}.rule=Host(`${dnsRecord}.${dnsDomain}`) >> ${labelFile}"
