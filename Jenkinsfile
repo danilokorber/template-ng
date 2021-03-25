@@ -65,9 +65,9 @@ pipeline {
 		stage("Prepare sonar settings") {
 			steps{
 				script{
-					sh "echo 'sonar.login=${CRED_NEXUS_USR}' >> ${sonarFile}"
-					sh "echo 'sonar.password=${CRED_NEXUS_PSW}' >> ${sonarFile}"
-					sh "echo 'sonar.projectKey=${applicationName}`)' >> ${sonarFile}"
+					sh "echo 'sonar.login=${CRED_SONAR_USR}' >> ${sonarFile}"
+					sh "echo 'sonar.password=${CRED_SONAR_PSW}' >> ${sonarFile}"
+					sh "echo 'sonar.projectKey=${applicationName}' >> ${sonarFile}"
 					sh "echo 'sonar.projectName=${applicationName}' >> ${sonarFile}"
 					sh "cat ${sonarFile}"
 				}
