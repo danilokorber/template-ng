@@ -12,7 +12,7 @@ def labelFile = "./dist/assets/labels.txt"
 
 def dockerNetwork = "easyware"
 
-def traefixResolver = "easywareresolver"
+def traefikResolver = "easywareresolver"
 
 def dnsCNAMEvalue = "obelix.easyware.io"
 
