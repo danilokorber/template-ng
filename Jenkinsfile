@@ -1,26 +1,32 @@
-def dockerImageGroup = "easyware"
-def applicationName
-def applicationVersion
-
+//=============================================
+//  APPLICATION SETTINGS
+//=============================================
 def gitURL = "https://github.com/danilokorber/${applicationName}.git"
+def dnsRecord = "template"         // "record" as in record.domain.com
+def dnsDomain = "easyware.io"      // "domain.com" as in record.domain.com
+def dnsResourceGroup = "Easyware"  // Check correct Resource Group in Azure
 
-def dnsResourceGroup = "Easyware"
-def dnsDomain = "easyware.io"
-def dnsRecord = "template"
-def dnsCNAMEvalue = "obelix.easyware.io"
-
+//=============================================
+//  ONLY CHANGE IF YOU KNOW WHAT YOU ARE DOING
+//=============================================
 def labelFile = "./dist/assets/labels.txt"
+def dockerNetwork = "easyware"
+
+def dnsCNAMEvalue = "obelix.easyware.io"
 
 def myNexusHostname = "nexus.easyware.io"
 def myNexusHostedRepoPort = "8083"
 def myNexusGroupRepoPort = "8082"
+def dockerImageGroup = "easyware"
+def applicationName
+def applicationVersion
 
 
 pipeline {
 	agent {
         docker {
             image 'dkorber/java-node:latest' 
-            args '-p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock --name jenkins-deploy' 
+            args '-p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock --name jenkins-temp' 
         }
     }
 	environment {
@@ -29,7 +35,7 @@ pipeline {
 
 	stages {
 
-		stage("Preparing") {
+		stage("Preparing environment") {
 			steps{
 				script {
 					// Read application name and version from package.json file
@@ -38,6 +44,7 @@ pipeline {
 					echo "applicationName: ${applicationName}"
 					echo "applicationVersion: ${applicationVersion}"
 					sh "npm config set registry https://${myNexusHostname}/repository/easyware-npm-group"
+					sh "docker login -u ${CRED_NEXUS_USR} -p ${CRED_NEXUS_PSW} ${myNexusHostname}:${myNexusHostedRepoPort}"
 				}
 			}
 		}		
@@ -46,7 +53,6 @@ pipeline {
 			steps{
 				script {
 					echo "Installing packages for ${applicationName}"	
-					sh "npm get registry"				
 					sh "npm install"
 				}
 			}
@@ -73,8 +79,7 @@ pipeline {
 		stage("Build docker") {
 			steps{
 				script {
-					echo "Building ${applicationName} docker image"
-					sh "docker login -u ${CRED_NEXUS_USR} -p ${CRED_NEXUS_PSW} ${myNexusHostname}:${myNexusHostedRepoPort}"
+					echo "Building docker image for ${applicationName}."
 					sh "docker build -t ${dockerImageGroup}/${applicationName} ."
 					sh "docker tag ${dockerImageGroup}/${applicationName} ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:${applicationVersion}"
 					sh "docker tag ${dockerImageGroup}/${applicationName} ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:latest"
@@ -97,10 +102,10 @@ pipeline {
 		stage("Start docker") {
 			steps{
 				script {
-					echo "Starting ${applicationName}"
+					echo "Deploying ${applicationName}"
 					sh "docker stop ${applicationName} || true && docker rm ${applicationName} || true"	
 					sh """docker run -d \
-					                 --network easyware \
+					                 --network ${dockerNetwork} \
 					                 --name ${applicationName} \
 									 --label-file ${labelFile} \
 									 ${dockerImageGroup}/${applicationName}"""
