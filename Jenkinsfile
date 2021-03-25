@@ -1,7 +1,7 @@
 //=============================================
 //  APPLICATION SETTINGS
 //=============================================
-def gitURL = "https://github.com/danilokorber/${applicationName}.git"
+//def gitURL = "https://github.com/danilokorber/${applicationName}.git"
 def dnsRecord = "template"         // "record" as in record.domain.com
 def dnsDomain = "easyware.io"      // "domain.com" as in record.domain.com
 def dnsResourceGroup = "Easyware"  // Check correct Resource Group in Azure
