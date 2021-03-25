@@ -34,7 +34,7 @@ pipeline {
 					applicationVersion = sh(script: "npm run env | grep npm_package_version | cut -d '=' -f 2", returnStdout: true).trim()
 					echo "applicationName: ${applicationName}"
 					echo "applicationVersion: ${applicationVersion}"
-					sh "npm config set registry https://${myNexusHostname}/repository/easyware-npm-group/_auth=YWRtaW46RGFuaWxvNzc="
+					sh "npm config set registry https://${myNexusHostname}/repository/easyware-npm-group"
 				}
 			}
 		}		
@@ -69,7 +69,7 @@ pipeline {
 		stage("Build docker") {
 			steps{
 				script {
-					echo "Building ${applicationName} docker"
+					echo "Building ${applicationName} docker image"
 					sh "docker build -t ${dockerImageGroup}/${applicationName} ."
 					sh "docker tag ${dockerImageGroup}/${applicationName} ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:${applicationVersion}"
 					sh "docker tag ${dockerImageGroup}/${applicationName} ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:latest"
