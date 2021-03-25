@@ -52,7 +52,7 @@ pipeline {
 			steps{
 				script {
 					echo "Linting ${applicationName}"
-					//sh "npm run sonar"
+					sh "npm run sonar"
 				}
 			}
 		}
