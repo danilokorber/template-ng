@@ -5,7 +5,7 @@
     "dnsRecord": "template",        // "record" as in record.domain.com
     "dnsDomain": "easyware.io",     // "domain.com" as in record.domain.com
     "dnsResourceGroup": "Easyware"  // Check correct Resource Group in Azure
-  }
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
