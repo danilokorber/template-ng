@@ -1,5 +1,6 @@
 def dockerImageGroup = "easyware"
 def applicationName = "template-ng"
+def applcationVersion = "1.0.0"
 
 def gitURL = "https://github.com/danilokorber/${applicationName}.git"
 
@@ -10,9 +11,9 @@ def dnsCNAMEvalue = "obelix.easyware.io"
 
 def labelFile = "./dist/assets/labels.txt"
 
-def myNexusHostname = "lpitgovnexus01.bmwgroup.net"
-def myNexusHostedRepoPort = "16015"
-def myNexusGroupRepoPort = "16016"
+def myNexusHostname = "nexus.easyware.io"
+def myNexusHostedRepoPort = "8083"
+def myNexusGroupRepoPort = "8082"
 
 
 pipeline {
@@ -34,14 +35,14 @@ pipeline {
 			}
 		}
 
-		// stage("Lint") {
-		// 	steps{
-		// 		script {
-		// 			echo "Linting ${applicationName}"
-		// 			sh "npm run sonar"
-		// 		}
-		// 	}
-		// }
+		stage("Lint") {
+			steps{
+				script {
+					echo "Linting ${applicationName}"
+					sh "npm run sonar"
+				}
+			}
+		}
 
 		stage("Build app") {
 			steps{
@@ -57,10 +58,10 @@ pipeline {
 				script {
 					echo "Building ${applicationName} docker"
 					sh "docker build -t ${dockerImageGroup}/${applicationName} ."
-					// sh "docker tag ${dockerImageGroup}/${applicationName} ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:${applicationVersion}"
-					// sh "docker tag ${dockerImageGroup}/${applicationName} ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:latest"
-					// sh "docker push ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:${applicationVersion}"
-					// sh "docker push ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:latest"
+					sh "docker tag ${dockerImageGroup}/${applicationName} ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:${applicationVersion}"
+					sh "docker tag ${dockerImageGroup}/${applicationName} ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:latest"
+					sh "docker push ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:${applicationVersion}"
+					sh "docker push ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:latest"
 				}
 			}
 		}
