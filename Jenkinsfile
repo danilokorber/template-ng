@@ -30,10 +30,10 @@ pipeline {
 			steps(
 				script {
 					// Read application name and version from package.json file
-					applicationName = sh(script: "npm run env | grep npm_package_name | cut -d '=' -f 2", returnStdout: true).trim()
-					applicationVersion = sh(script: "npm run env | grep npm_package_version | cut -d '=' -f 2", returnStdout: true).trim()
-					echo "applicationName: '${applicationName}'"
-					echo "applicationVersion: '${applicationVersion}'"
+					applicationName = sh "npm run env | grep npm_package_name | cut -d '=' -f 2"
+					applicationVersion = sh "npm run env | grep npm_package_version | cut -d '=' -f 2"
+					echo "applicationName: ${applicationName}"
+					echo "applicationVersion: ${applicationVersion}"
 					sh "npm config set registry https://${myNexusHostname}/repository/easyware-npm-group/_auth=YWRtaW46RGFuaWxvNzc="
 				}
 			)
