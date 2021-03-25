@@ -9,7 +9,7 @@ def dnsResourceGroup = "Easyware"  // Check correct Resource Group in Azure
 //=============================================
 //  ONLY CHANGE IF YOU KNOW WHAT YOU ARE DOING
 //=============================================
-def labelFile = "./dist/assets/labels.txt"
+def labelFile = "./dist/assets/labels2.txt"
 def dockerNetwork = "easyware"
 
 def dnsCNAMEvalue = "obelix.easyware.io"
@@ -95,6 +95,18 @@ pipeline {
 					echo "Creating DNS record ${dnsRecord}.${dnsDomain}"
 					def azureCmd = "az network dns record-set cname set-record -g ${dnsResourceGroup} -z ${dnsDomain} -n ${dnsRecord} -c ${dnsCNAMEvalue}"
 					sh "docker run dkorber/azure ${azureCmd}"
+				}
+			}
+		}
+
+		stage("Prepare docker deployment") {
+			steps{
+				script{
+					sh "touch ${labelFile}"
+					sh "echo traefik.enable=true >> ${labelFile}"
+					sh "echo traefik.http.routers.template.entrypoints=websecure >> ${labelFile}"
+					sh "echo traefik.http.routers.template.rule=Host(`${dnsRecord}.${dnsDomain}`) >> ${labelFile}"
+					sh "echo traefik.http.routers.template.tls.certresolver=easywareresolver >> ${labelFile}"
 				}
 			}
 		}
