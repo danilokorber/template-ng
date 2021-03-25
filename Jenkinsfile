@@ -1,16 +1,18 @@
-//=============================================
+//=====================================================================
 //  APPLICATION SETTINGS
-//=============================================
-//def gitURL = "https://github.com/danilokorber/${applicationName}.git"
+//=====================================================================
 def dnsRecord = "template"         // "record" as in record.domain.com
 def dnsDomain = "easyware.io"      // "domain.com" as in record.domain.com
 def dnsResourceGroup = "Easyware"  // Check correct Resource Group in Azure
 
-//=============================================
+//=====================================================================
 //  ONLY CHANGE IF YOU KNOW WHAT YOU ARE DOING
-//=============================================
-def labelFile = "./dist/assets/labels2.txt"
+//=====================================================================
+def labelFile = "./dist/assets/labels.txt"
+
 def dockerNetwork = "easyware"
+
+def traefixResolver = "easywareresolver"
 
 def dnsCNAMEvalue = "obelix.easyware.io"
 
@@ -103,10 +105,10 @@ pipeline {
 			steps{
 				script{
 					sh "touch ${labelFile}"
-					sh "echo traefik.enable=true >> ${labelFile}"
-					sh "echo traefik.http.routers.template.entrypoints=websecure >> ${labelFile}"
-					sh "echo traefik.http.routers.template.rule=Host(`${dnsRecord}.${dnsDomain}`) >> ${labelFile}"
-					sh "echo traefik.http.routers.template.tls.certresolver=easywareresolver >> ${labelFile}"
+					sh "echo 'traefik.enable=true' >> ${labelFile}"
+					sh "echo 'traefik.http.routers.template.entrypoints=websecure' >> ${labelFile}"
+					sh "echo 'traefik.http.routers.template.rule=Host(`${dnsRecord}.${dnsDomain}`)' >> ${labelFile}"
+					sh "echo 'traefik.http.routers.template.tls.certresolver=${traefikResolver}' >> ${labelFile}"
 				}
 			}
 		}
@@ -122,6 +124,15 @@ pipeline {
 									 --label-file ${labelFile} \
 									 ${dockerImageGroup}/${applicationName}"""
 					sh "rm ${labelFile}"					
+				}
+			}
+		}
+
+		stage("Prune docker") {
+			steps{
+				script {
+					echo "Pruning ${applicationName}"
+					sh "docker system prune"		
 				}
 			}
 		}
