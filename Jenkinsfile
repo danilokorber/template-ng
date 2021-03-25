@@ -1,6 +1,6 @@
 def dockerImageGroup = "easyware"
 def applicationName = "template-ng"
-def applcationVersion = "1.0.0"
+def applicationVersion = "1.0.0"
 
 def gitURL = "https://github.com/danilokorber/${applicationName}.git"
 
@@ -39,7 +39,7 @@ pipeline {
 			steps{
 				script {
 					echo "Linting ${applicationName}"
-					sh "npm run sonar"
+					//sh "npm run sonar"
 				}
 			}
 		}
