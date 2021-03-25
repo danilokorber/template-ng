@@ -52,11 +52,10 @@ pipeline {
 					sh "npm config set registry https://${myNexusHostname}/repository/easyware-npm-group"
 					sh "docker login -u ${CRED_NEXUS_USR} -p ${CRED_NEXUS_PSW} ${myNexusHostname}:${myNexusHostedRepoPort}"
 
-					node{
-						def json = readFile(file:'package.json')
-						def package = new JsonSlurperClassic().parseText(json)
-						echo "Application version: ${package.version}"
-					}
+					def json = readFile(file:'package.json')
+					def package = new JsonSlurperClassic().parseText(json)
+					echo "Application version: ${package.version}"
+
 				}
 			}
 		}		
