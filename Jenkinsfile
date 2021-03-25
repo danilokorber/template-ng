@@ -1,6 +1,6 @@
 def dockerImageGroup = "easyware"
-def applicationName = "template-ng"
-def applicationVersion = "1.0.0"
+def applicationName
+def applicationVersion
 
 def gitURL = "https://github.com/danilokorber/${applicationName}.git"
 
@@ -24,7 +24,20 @@ pipeline {
         }
     }
 
-	stages {		
+	stages {
+
+		stage("Preparing") {
+			steps(
+				script {
+					// Read application name and version from package.json file
+					applicationName = sh(script: "npm run env | grep npm_package_name | cut -d '=' -f 2", returnStdout: true).trim()
+					applicationVersion = sh(script: "npm run env | grep npm_package_version | cut -d '=' -f 2", returnStdout: true).trim()
+					echo "applicationName: '${applicationName}'"
+					echo "applicationVersion: '${applicationVersion}'"
+					sh "npm config set registry https://${myNexusHostname}/repository/easyware-npm-group/_auth=YWRtaW46RGFuaWxvNzc="
+				}
+			)
+		}		
 
 		stage("Install packages") {
 			steps{
