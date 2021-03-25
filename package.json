@@ -1,6 +1,11 @@
 {
   "name": "template",
-  "version": "1.1.0",
+  "version": "1.2.0",
+  "jenkins": {
+    "dnsRecord": "template",        // "record" as in record.domain.com
+    "dnsDomain": "easyware.io",     // "domain.com" as in record.domain.com
+    "dnsResourceGroup": "Easyware"  // Check correct Resource Group in Azure
+  }
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
