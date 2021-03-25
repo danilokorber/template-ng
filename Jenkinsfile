@@ -23,6 +23,9 @@ pipeline {
             args '-p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock --name jenkins-deploy' 
         }
     }
+	environment {
+        CRED_NEXUS = credentials('easywareNexusAdmin')
+    }
 
 	stages {
 
@@ -42,7 +45,8 @@ pipeline {
 		stage("Install packages") {
 			steps{
 				script {
-					echo "Installing packages for ${applicationName}"					
+					echo "Installing packages for ${applicationName}"	
+					sh "npm get registry"				
 					sh "npm install"
 				}
 			}
@@ -70,6 +74,7 @@ pipeline {
 			steps{
 				script {
 					echo "Building ${applicationName} docker image"
+					sh "docker login -u ${CRED_NEXUS_USR} -p ${CRED_NEXUS_PSW} ${myNexusHostname}:${myNexusHostedRepoPort}"
 					sh "docker build -t ${dockerImageGroup}/${applicationName} ."
 					sh "docker tag ${dockerImageGroup}/${applicationName} ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:${applicationVersion}"
 					sh "docker tag ${dockerImageGroup}/${applicationName} ${myNexusHostname}:${myNexusHostedRepoPort}/${dockerImageGroup}/${applicationName}:latest"
