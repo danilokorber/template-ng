@@ -9,6 +9,7 @@ def dnsResourceGroup = "Easyware"  // Check correct Resource Group in Azure
 //  ONLY CHANGE IF YOU KNOW WHAT YOU ARE DOING
 //===========================================================================
 def labelFile = "./dist/assets/labels.txt"
+def sonarFile = "./sonar-project.properties"
 
 def dockerNetwork = "easyware"
 
@@ -33,6 +34,7 @@ pipeline {
     }
 	environment {
         CRED_NEXUS = credentials('easywareNexusAdmin')
+		CRED_SONAR = credentials('easywareSonarJenkins')
     }
 
 	stages {
@@ -56,6 +58,18 @@ pipeline {
 				script {
 					echo "Installing packages for ${applicationName}"	
 					sh "npm install"
+				}
+			}
+		}
+
+		stage("Prepare sonar settings") {
+			steps{
+				script{
+					sh "touch ${sonarFile}"
+					sh "echo 'sonar.login=${CRED_NEXUS_USR}' >> ${sonarFile}"
+					sh "echo 'sonar.password=${CRED_NEXUS_PSW}' >> ${sonarFile}"
+					sh "echo 'sonar.projectKey=${applicationName}`)' >> ${sonarFile}"
+					sh "echo 'sonar.projectName=${applicationName}' >> ${sonarFile}"
 				}
 			}
 		}
