@@ -24,9 +24,6 @@ def dockerImageGroup = "easyware"
 def applicationName
 def applicationVersion
 
-//use JsonSlurperClassic because it produces HashMap that could be serialized by pipeline
-import groovy.json.JsonSlurperClassic
-
 pipeline {
 	agent {
         docker {
@@ -52,9 +49,8 @@ pipeline {
 					sh "npm config set registry https://${myNexusHostname}/repository/easyware-npm-group"
 					sh "docker login -u ${CRED_NEXUS_USR} -p ${CRED_NEXUS_PSW} ${myNexusHostname}:${myNexusHostedRepoPort}"
 
-					def json = readFile(file:'package.json')
-					def package = new JsonSlurperClassic().parseText(json)
-					echo "Application version: ${package.version}"
+					def props = readJSON file: './package.json'
+					sh "echo ${props.version}"
 
 				}
 			}
