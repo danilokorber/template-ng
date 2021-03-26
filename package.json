@@ -23,7 +23,7 @@
       "domain": "easyware.io",
       "resourceGroup": "Easyware",
       "cname": "obelix.easyware.io"
-    },
+    }
   },
   "scripts": {
     "ng": "ng",
