@@ -1,6 +1,6 @@
 {
   "name": "template",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "jenkins": {
     "dns": {
       "host": "template",
@@ -22,6 +22,7 @@
       "network": "easyware"
     },
     "sonar": {
+      "host": "https://sonar.easyware.io",
       "properties": "./config/sonar.properties"
     }
   },

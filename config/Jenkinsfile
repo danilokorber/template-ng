@@ -42,6 +42,7 @@ pipeline {
 		stage("Set sonar settings") {
 			steps{
 				script{
+					sh "echo 'sonar.host.url=${props.jenkins.sonar.host}' >> ${props.jenkins.sonar.properties}"
 					sh "echo 'sonar.login=${CRED_SONAR_USR}' >> ${props.jenkins.sonar.properties}"
 					sh "echo 'sonar.password=${CRED_SONAR_PSW}' >> ${props.jenkins.sonar.properties}"
 					sh "echo 'sonar.projectKey=${props.name}' >> ${props.jenkins.sonar.properties}"

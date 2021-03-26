@@ -4,6 +4,7 @@
   "compilerOptions": {
     "baseUrl": "./src", // setting a value for baseUrl is required
     "outDir": "./out-tsc/app",
+    "resolveJsonModule": true,
     "types": [],
     "paths": {
       "@pages/*": ["./app/pages/*"],
