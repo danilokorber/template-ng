@@ -5,7 +5,7 @@
     "traefik": {
       "resolver": "easywareresolver"
     },
-    "nexus" {
+    "nexus": {
       "hostname": "nexus.easyware.io",
       "hostedPort": 8083,
       "groupPort": 8082,
@@ -23,7 +23,7 @@
       "domain": "easyware.io",
       "resourceGroup": "Easyware",
       "cname": "obelix.easyware.io"
-    }
+    },
   },
   "scripts": {
     "ng": "ng",
