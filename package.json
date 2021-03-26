@@ -2,6 +2,12 @@
   "name": "template",
   "version": "1.2.2",
   "jenkins": {
+    "dns": {
+      "host": "template",
+      "domain": "easyware.io",
+      "resourceGroup": "Easyware",
+      "cname": "obelix.easyware.io"
+    },
     "traefik": {
       "resolver": "easywareresolver"
     },
@@ -17,12 +23,6 @@
     },
     "sonar": {
       "properties": "./config/sonar.properties"
-    },
-    "dns": {
-      "host": "template",
-      "domain": "easyware.io",
-      "resourceGroup": "Easyware",
-      "cname": "obelix.easyware.io"
     }
   },
   "scripts": {
