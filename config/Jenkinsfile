@@ -9,8 +9,8 @@ def dnsRecord
 def dnsDomain
 def dnsResourceGroup
 
-def labelFile = "./dist/assets/labels.txt"
-def sonarFile = "./sonar-project.properties"
+def labelFile = "../dist/assets/labels.txt"
+def sonarFile = "../sonar-project.properties"
 
 def dockerNetwork = "easyware"
 
