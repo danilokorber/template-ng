@@ -39,7 +39,7 @@ pipeline {
 
 	stages {
 
-		stage("Preparing environment") {
+		stage("Prepare environment") {
 			steps{
 				script {
 					// Read application name and version from package.json file
@@ -68,7 +68,7 @@ pipeline {
 			}
 		}
 
-		stage("Prepare sonar settings") {
+		stage("Set sonar settings") {
 			steps{
 				script{
 					sh "echo 'sonar.login=${CRED_SONAR_USR}' >> ${sonarFile}"
