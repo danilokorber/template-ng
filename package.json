@@ -1,10 +1,29 @@
 {
   "name": "template",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "jenkins": {
-    "dnsRecord": "template", 
-    "dnsDomain": "easyware.io",
-    "dnsResourceGroup": "Easyware"
+    "traefik": {
+      "resolver": "easywareresolver"
+    },
+    "nexus" {
+      "hostname": "nexus.easyware.io",
+      "hostedPort": 8083,
+      "groupPort": 8082,
+      "imageGroup": "easyware"
+    },
+    "docker": {
+      "labels": "./config/dockerLabels.txt",
+      "network": "easyware"
+    },
+    "sonar": {
+      "properties": "./config/sonar.properties"
+    },
+    "dns": {
+      "host": "template",
+      "domain": "easyware.io",
+      "resourceGroup": "Easyware",
+      "cname": "obelix.easyware.io"
+    }
   },
   "scripts": {
     "ng": "ng",
@@ -15,7 +34,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "sonar": "sonar-scanner"
+    "sonar": "sonar-scanner -Dproject.settings=./config/sonar.properties"
   },
   "private": true,
   "dependencies": {
