@@ -1,7 +1,7 @@
 {
   "name": "template",
-  "version": "1.2.4",
-  "templateVersion": "1.2.4",
+  "version": "1.2.5",
+  "templateVersion": "1.2.5",
   "jenkins": {
     "dns": {
       "host": "template",

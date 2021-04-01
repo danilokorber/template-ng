@@ -19,3 +19,7 @@ Renomear pasta principal
 `npm i`
 
 `npm up`
+
+## Controle de versão
+
+1.2.5 - Correção no nome do serviço do traefik >> ${props.name}
