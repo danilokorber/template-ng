@@ -3,12 +3,13 @@
 //===========================================================================
 def props
 def randomUUID = UUID.randomUUID().toString()
+def randomPort = Math.abs(new Random().nextInt() % 3099) + 3001
 
 pipeline {
 	agent {
         docker {
             image 'dkorber/java-node:latest' 
-            args '-p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock --name jenkins-' + randomUUID
+            args '-p ' + randomPort + ':' + randomPort + ' -v /var/run/docker.sock:/var/run/docker.sock --name jenkins-' + randomUUID
         }
     }
 	environment {
