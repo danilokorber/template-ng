@@ -2,12 +2,13 @@
 //  ONLY CHANGE THE FOLLOWING IF YOU KNOW WHAT YOU ARE DOING
 //===========================================================================
 def props
+def randomUUID = UUID.randomUUID().toString()
 
 pipeline {
 	agent {
         docker {
             image 'dkorber/java-node:latest' 
-            args '-p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock --name jenkins-temp' 
+            args '-p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock --name jenkins-' + randomUUID
         }
     }
 	environment {

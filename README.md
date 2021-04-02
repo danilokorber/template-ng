@@ -23,3 +23,4 @@ Renomear pasta principal
 ## Controle de versão
 
 1.2.5 - Correção no nome do serviço do traefik >> ${props.name}
+1.2.6 - Correção do nome do container do Jenkins para usar um número aleatório para evitar conflitos
