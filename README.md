@@ -26,3 +26,4 @@ Renomear pasta principal
 1.2.6 - Correção na porta e no nome do container do Jenkins para usar um número aleatório para evitar conflitos
 1.3.0 - Tailwindcss com jit
 1.4.0 - Adição de schematics para layout, control e page.
+1.4.1 - Remoção da fonte em itálico.

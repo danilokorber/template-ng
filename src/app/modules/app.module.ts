@@ -6,12 +6,23 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ZorroModule } from '@modules/zorro/zorro.module';
+import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
 
 import { RootLayout } from '../layouts/root.component';
 
 @NgModule({
   declarations: [RootLayout],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, HttpClientModule, FontAwesomeModule, ZorroModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    HttpClientModule,
+    FontAwesomeModule,
+    ZorroModule,
+    NgxGoogleAnalyticsModule.forRoot('tracking-code'),
+    NgxGoogleAnalyticsRouterModule,
+  ],
   providers: [],
   bootstrap: [RootLayout],
 })

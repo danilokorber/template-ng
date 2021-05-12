@@ -1,7 +1,7 @@
 {
   "name": "template",
-  "version": "1.4.0",
-  "templateVersion": "1.4.0",
+  "version": "1.4.1",
+  "templateVersion": "1.4.1",
   "jenkins": {
     "dns": {
       "host": "template",
@@ -55,6 +55,7 @@
     "easyware-ng-schematics": "^1.0.0",
     "ng-zorro-antd": "^11.2.0",
     "ngx-build-plus": "^11.0.0",
+    "ngx-google-analytics": "^11.2.1",
     "rxjs": "^6.6.6",
     "tslib": "^2.1.0",
     "zone.js": "^0.11.4"
