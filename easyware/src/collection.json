@@ -1,0 +1,21 @@
+{
+  "$schema": "../../@angular-devkit/schematics/collection-schema.json",
+
+  "schematics": {
+    "control": {
+      "description": "Schematic to create controls",
+      "factory": "./control",
+      "schema": "./control/schema.json"
+    },
+    "layout": {
+      "description": "Schematic to create layouts",
+      "factory": "./layout",
+      "schema": "./layout/schema.json"
+    },
+    "page": {
+      "description": "Schematic to create pages",
+      "factory": "./page",
+      "schema": "./page/schema.json"
+    }
+  }
+}

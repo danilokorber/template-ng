@@ -3,11 +3,14 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "baseUrl": "./src", // setting a value for baseUrl is required
+    //"files": ["src/main.ts", "src/polyfills.ts"],
+    //"include": ["src/**/*.d.ts"],
     "outDir": "./out-tsc/app",
-    "resolveJsonModule": true,
-    "types": [],
     "paths": {
+      "@settings/*": ["../settings/*"],
+      "@config/*": ["../config/*"],
       "@pages/*": ["./app/pages/*"],
+      "@layouts/*": ["./app/layouts/*"],
       "@modules/*": ["./app/modules/*"],
       "@services/*": ["./app/services/*"],
       "@interfaces/*": ["./app/interfaces/*"],
@@ -20,11 +23,13 @@
       "@assets/*": ["./app/assets/*"],
       "@img/*": ["./app/assets/img/*"],
       "@css/*": ["./app/assets/css/*"],
+      "@fonts/*": ["./app/assets/fonts/*"],
       "@mocks/*": ["./app/assets/mocks/*"],
       "@icons/*": ["./app/assets/icons/*"],
-      "@env/*": ["./environments/*"]
+      "@env/*": ["./environments/*"],
+      "@root/*": ["../*"]
     }
   },
-  "files": ["src/main.ts", "src/polyfills.ts"],
-  "include": ["src/**/*.d.ts"]
+  "resolveJsonModule": true,
+  "types": []
 }

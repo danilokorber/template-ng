@@ -24,3 +24,5 @@ Renomear pasta principal
 
 1.2.5 - Correção no nome do serviço do traefik >> ${props.name}
 1.2.6 - Correção na porta e no nome do container do Jenkins para usar um número aleatório para evitar conflitos
+1.3.0 - Tailwindcss com jit
+1.4.0 - Adição de schematics para layout, control e page.

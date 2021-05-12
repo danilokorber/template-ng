@@ -1,21 +1,28 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  },
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
-    "resolveJsonModule": true,
-    "target": "es2015",
-    "module": "es2020",
     "lib": ["es2018", "dom"],
+    "module": "es2020",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "outDir": "./dist/out-tsc",
     "paths": {
+      "@settings/*": ["./settings/*"],
+      "@config/*": ["./config/*"],
       "@pages/*": ["./src/app/pages/*"],
+      "@layouts/*": ["./src/app/layouts/*"],
       "@modules/*": ["./src/app/modules/*"],
       "@services/*": ["./src/app/services/*"],
       "@interfaces/*": ["./src/app/interfaces/*"],
@@ -28,9 +35,15 @@
       "@assets/*": ["./src/app/assets/*"],
       "@img/*": ["./src/app/assets/img/*"],
       "@css/*": ["./src/app/assets/css/*"],
+      "@fonts/*": ["./src/app/assets/fonts/*"],
       "@mocks/*": ["./src/app/assets/mocks/*"],
       "@icons/*": ["./src/app/assets/icons/*"],
-      "@env/*": ["./src/environments/*"]
-    }
+      "@env/*": ["./src/environments/*"],
+      "@root/*": ["./*"]
+    },
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2015"
   }
 }
