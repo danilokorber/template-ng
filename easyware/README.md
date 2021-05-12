@@ -1,28 +1,19 @@
-# Getting Started With Schematics
-
-This repository is a basic Schematic implementation that serves as a starting point to create and publish Schematics to NPM.
-
-### Testing
-
-To test locally, install `@angular-devkit/schematics-cli` globally and use the `schematics` command line tool. That tool acts the same as the `generate` command of the Angular CLI, but also has a debug mode.
-
-Check the documentation with
-```bash
-schematics --help
-```
-
-### Unit Testing
-
-`npm run test` will run the unit tests, using Jasmine as a runner and test framework.
-
-### Publishing
-
-To publish, simply do:
+# Getting Started
 
 ```bash
-npm run build
-npm publish
+ng g easyware-ng-schematics:layout <name>
 ```
 
-That's it!
- 
+```bash
+ng g easyware-ng-schematics:control <name>
+```
+
+```bash
+ng g easyware-ng-schematics:page <name>
+```
+
+# Release notes
+
+1.0.0 - 2021-05-12 - First release.
+
+1.0.1 - 2021-05-12 - Fixed default styling to SCSS.

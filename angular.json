@@ -6,6 +6,15 @@
     "template-ng": {
       "projectType": "application",
       "schematics": {
+        "easyware-ng-schematics:layout": {
+          "skipTests": true
+        },
+        "easyware-ng-schematics:page": {
+          "skipTests": true
+        },
+        "easyware-ng-schematics:control": {
+          "skipTests": true
+        },
         "@schematics/angular:component": {
           "inlineStyle": true,
           "style": "scss",
@@ -21,9 +30,6 @@
           "skipTests": true
         },
         "@schematics/angular:interceptor": {
-          "skipTests": true
-        },
-        "@schematics/easyware:layout": {
           "skipTests": true
         },
         "@schematics/angular:module": {
