@@ -3,16 +3,19 @@
 
   "schematics": {
     "control": {
+      "aliases": ["ctrl"],
       "description": "Schematic to create controls",
       "factory": "./control",
       "schema": "./control/schema.json"
     },
     "layout": {
+      "aliases": ["l"],
       "description": "Schematic to create layouts",
       "factory": "./layout",
       "schema": "./layout/schema.json"
     },
     "page": {
+      "aliases": ["p"],
       "description": "Schematic to create pages",
       "factory": "./page",
       "schema": "./page/schema.json"

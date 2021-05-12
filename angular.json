@@ -7,39 +7,58 @@
       "projectType": "application",
       "schematics": {
         "easyware-ng-schematics:layout": {
-          "skipTests": true
+          "skipTests": true,
+          "export": true,
+          "path": "src/app/layouts"
         },
         "easyware-ng-schematics:page": {
-          "skipTests": true
+          "skipTests": true,
+          "export": true,
+          "path": "src/app/pages"
         },
         "easyware-ng-schematics:control": {
-          "skipTests": true
+          "inlineStyle": true,
+          "skipTests": true,
+          "export": true,
+          "path": "src/app/controls"
         },
         "@schematics/angular:component": {
           "inlineStyle": true,
           "style": "scss",
-          "skipTests": true
+          "skipTests": true,
+          "export": true,
+          "path": "src/app/components"
         },
         "@schematics/angular:class": {
-          "skipTests": true
+          "skipTests": true,
+          "path": "src/app/classes"
         },
         "@schematics/angular:directive": {
-          "skipTests": true
+          "skipTests": true,
+          "export": true,
+          "path": "src/app/directives"
         },
         "@schematics/angular:guard": {
-          "skipTests": true
+          "skipTests": true,
+          "export": true,
+          "path": "src/app/guards"
         },
         "@schematics/angular:interceptor": {
-          "skipTests": true
+          "skipTests": true,
+          "path": "src/app/interceptors"
         },
         "@schematics/angular:module": {
-          "skipTests": true
+          "skipTests": true,
+          "path": "src/app/modules"
         },
         "@schematics/angular:pipe": {
-          "skipTests": true
+          "skipTests": true,
+          "export": true,
+          "path": "src/app/pipes"
         },
         "@schematics/angular:service": {
-          "skipTests": true
+          "skipTests": true,
+          "path": "src/app/services"
         }
       },
       "root": "",
